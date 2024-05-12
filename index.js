@@ -4,12 +4,13 @@ import { connection } from './dataBase/connection.js';
 import { allRoutes } from './src/modules/routes.js';
 import { globalError } from './src/Utiletis/globalErrorHandling.js';
 import { AppError } from './src/Utiletis/AppError.js';
-
+import cors from "cors"
 
 const app = express()
 const port = 3000
 
 app.use(express.json())
+app.use(cors())
 app.use("/uploads",express.static("uploads"))
 
 connection()
@@ -24,4 +25,4 @@ app.use(globalError)
 
 
 
-app.listen(port,()=> console.log(`server is run ${port}`))
+app.listen(process.env.PORT || port,()=> console.log(`server is run ${port}`))
