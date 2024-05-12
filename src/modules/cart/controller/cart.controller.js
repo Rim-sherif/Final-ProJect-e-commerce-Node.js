@@ -1,4 +1,5 @@
 import cartModel from "../../../../dataBase/models/cart.model.js";
+import cuponModel from "../../../../dataBase/models/coupon.model.js";
 import productsModel from "../../../../dataBase/models/products.model.js";
 import { AppError } from "../../../Utiletis/AppError.js";
 import { handelError } from "../../../middelware/handelError.js";
@@ -84,10 +85,20 @@ const updatecart  = handelError(async (req, res, next) => {
 
   calcPrice(isCartExist)
   await isCartExist.save()
-  res.json({ message: "Ay7aga",isCartExist });
+  res.json({ message: "Done",isCartExist });
 });
+
+
+const applyCoupon = handelError(async (req, res, next) => {
+  let code = await cuponModel.findOne({code: req.params.code})
+  let cart = await cartModel.findOne({user: req.user._id})
+  cart.totalPriceAfterDiscount = cart.totalPrice -(cart.totalPrice * code.discount) / 100;
+  cart.discount = code.discount
+  await cart.save()
+  res.json({ message: "Done",cart});
+})
 
 export {
   addToCart,
-  getCart,deleteCartItem,updatecart
+  getCart,deleteCartItem,updatecart,applyCoupon
 };

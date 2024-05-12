@@ -3,6 +3,7 @@ import brandRoutes from "./brand/brand.routes.js"
 import cartRouter from "./cart/cart.routes.js"
 import categoryRoutes from "./category/category.routes.js"
 import couponRouter from "./coupun/coupon.routes.js"
+import orderRoutes from "./order/order.routes.js"
 import productRoutes from "./products/products.routes.js"
 import reviewRouter from "./review/review.routes.js"
 import subCategoryRoutes from "./subCategory/subCategory.routes.js"
@@ -20,6 +21,7 @@ export const allRoutes = (app) =>{
     app.use("/api/v1/review",reviewRouter)
     app.use("/api/v1/coupon",couponRouter)
     app.use("/api/v1/cart",cartRouter)
+    app.use("/api/v1/order",orderRoutes)
     app.use("/api/v1/wichList",wichListRouter)
 
 }

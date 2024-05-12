@@ -1,6 +1,6 @@
 import express from 'express';
 import { protectRoutes } from '../auth/auth.controller.js';
-import { addToCart, deleteCartItem, getCart, updatecart } from './controller/cart.controller.js';
+import { addToCart, applyCoupon, deleteCartItem, getCart, updatecart } from './controller/cart.controller.js';
 
 
 
@@ -14,8 +14,7 @@ cartRouter.route("/")
 
 
 cartRouter.route("/:id")
-    // .get(getAllreviewById)
-    // .patch(updatereview)
+    .post(protectRoutes,applyCoupon)
     .delete(protectRoutes,deleteCartItem)
 
     
